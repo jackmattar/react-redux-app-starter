@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import * as Reducer from '../store/hooks_state/hooks_reducer';
+import * as ACTIONS from '../store/actions/actions'
+
 
 const HooksContainer1 = () => {
 
@@ -7,7 +10,7 @@ const HooksContainer1 = () => {
   //const [state, dispatch] = useReducer(reducer, initial state)
   const [stateValue, setValue] = useState(0)
   const [useEffectValue, setUseEffectValue] = useState(null)
-  const [state, dispatch] = useReducer(reducer, initial state)
+  const [state, dispatch] = useReducer(Reducer.HooksReducer, Reducer.initialState)
 
   useEffect(() => {
     setTimeout(() => 
@@ -26,6 +29,18 @@ const HooksContainer1 = () => {
     setUseEffectValue('Some string')
   }
 
+  const handleDispatchtrue = () => {
+    //dispatch(ACTIONS.SUCCESS)
+    //dispatch(type: "SUCESS")
+    dispatch(ACTIONS.success())
+  }
+
+  const handleDispatchfalse = () => {
+    //dispatch(ACTIONS.FAILURE)
+    //dispatch(type: "FAILURE")
+    dispatch(ACTIONS.failure())
+  }
+
     return(
       <div>
         React Hooks
@@ -33,10 +48,17 @@ const HooksContainer1 = () => {
         <button onClick = { () => incrementValue()}> Inc Local State </button>
         <button onClick = { () => decrementValue()}> Dec Local State </button>
         <button onClick = { () => changeuseEffectValue()}> Change Use Effect </button>
+        <button onClick = { () => handleDispatchtrue()}> Dispatch True </button>
+        <button onClick = { () => handleDispatchfalse()}> Dispatch False </button>
         <div>
           <p>
             {useEffectValue?<p> {useEffectValue}</p>:<p> No value </p>
             }
+          </p>
+          <p>
+            {state.stateprop1
+            ?<p> state prop1 is true</p>
+            :<p> state prop1 is false </p>}
           </p>
           <p>
             Local State: {stateValue}
